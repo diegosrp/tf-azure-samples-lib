@@ -24,6 +24,19 @@ module "network_security_groups" {
           destination_address_prefix = "VirtualNetwork"
           destination_port_range     = "8080"
         },
+        {
+          name                       = "AllowInboundExample2"
+          description                = "Example rule to allow inbound traffic."
+          priority                   = 130
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Tcp"
+          source_address_prefix      = "VirtualNetwork"
+          source_port_range          = "5500"
+          destination_address_prefix = "VirtualNetwork"
+          destination_port_range     = "8181"
+        },
+
       ],
       tags = {
         environment = "production"

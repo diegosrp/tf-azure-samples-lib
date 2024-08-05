@@ -13,28 +13,26 @@ module "network_security_groups" {
       resource_group_name = module.resource_groups.all_resource_groups_names["rg-example-prod"]
       security_rules = [
         {
-          name                       = "AllowInboundExample"
-          description                = "Example rule to allow inbound traffic."
-          priority                   = 120
-          direction                  = "Inbound"
-          access                     = "Allow"
-          protocol                   = "Tcp"
-          source_address_prefix      = "VirtualNetwork"
-          source_port_range          = "5701"
-          destination_address_prefix = "VirtualNetwork"
-          destination_port_range     = "8080"
+          name                         = "AllowInboundExample"
+          priority                     = 120
+          direction                    = "Inbound"
+          access                       = "Allow"
+          protocol                     = "Tcp"
+          source_port_range            = "*"
+          destination_port_range       = "443"
+          source_address_prefix        = "Internet"
+          destination_address_prefix   = "*"
         },
         {
-          name                       = "AllowInboundExample2"
-          description                = "Example rule to allow inbound traffic."
-          priority                   = 130
-          direction                  = "Inbound"
-          access                     = "Allow"
-          protocol                   = "Tcp"
-          source_address_prefix      = "VirtualNetwork"
-          source_port_range          = "5500"
-          destination_address_prefix = "VirtualNetwork"
-          destination_port_range     = "8181"
+          name                         = "AllowOutboundExample"
+          priority                     = 130
+          direction                    = "Outbound"
+          access                       = "Allow"
+          protocol                     = "*"
+          source_port_range            = "*"
+          destination_port_ranges      = ["5701", "8080"]
+          source_address_prefix        = "VirtualNetwork"
+          destination_address_prefix   = "VirtualNetwork"
         },
 
       ],
